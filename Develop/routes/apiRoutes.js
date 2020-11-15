@@ -4,9 +4,10 @@
 //dependencies
 
 const router = require("express").Router();
-const store = require("./../db/db.json");
+const store = require("../db/db.json");
 
 // routes
+module.exports = function (router) {
 
 router.get("/notes", function (req, res) {
     store
@@ -29,4 +30,4 @@ router.delete("/notes/:title", function (req, res) {
         .catch(err => res.status(500).json(err))
 });
 
-module.exports = router;
+};
