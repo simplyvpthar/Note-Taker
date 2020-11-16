@@ -1,24 +1,17 @@
-// dependencies
+var path = require("path");
 
-const path = require("path");
-const router = require("express").Router();
+module.exports = function(app) {
 
-// routes
+  app.get("/notes", function(req, res) {
+    res.sendFile(path.join(__dirname, "./public/notes.html"));
+  });
 
-// HTML GET Requests
-// Below code handles when users "visit" a page.
-// In each of the below cases the user is shown an HTML page of content
-// ---------------------------------------------------------------------------
+  app.get("/index", function(req, res) {
+    res.sendFile(path.join(__dirname, "./public/index.html"));
+  });
 
+  app.get("*", function(req, res) {
+     res.sendFile(path.join(__dirname, "./public/index.html"));
+  });
 
-// Get notes.html if the url is localhost:3000/notes
-router.get("/notes", function (req, res) {
-    res.sendFile(path.join(__dirname, "../public/notes.html"));
-});
-
-// If no matching route is found default to home
-router.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "../public/index.html"));
-});
-
-module.exports = router;
+};
